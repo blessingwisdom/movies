@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
@@ -35,6 +37,7 @@ class UpcomingMovieBloc extends Bloc<UpcomingMovieEvent, UpcomingMovieState> {
 
   void _onMovieLoadUpcoming(
       UpcomingMovieEventLoad event, Emitter<UpcomingMovieState> emit) async {
+    print('Goal');
     final movieResponse = await _repository.fetchUpcomingMovies();
     emit(UpcomingMovieStateLoaded(movieResponse));
   }

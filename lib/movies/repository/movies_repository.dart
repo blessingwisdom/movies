@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:dio/dio.dart';
 import 'package:movies/constants/app_constants.dart';
 import 'package:movies/movies/models/movie_response.dart';

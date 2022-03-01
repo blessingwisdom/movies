@@ -34,6 +34,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<UpcomingMovieBloc>(
+      lazy: false,
       create: (BuildContext context) => UpcomingMovieBloc(
         repository: context.read<MovieRepository>(),
       )..add(const UpcomingMovieEventLoad()),
