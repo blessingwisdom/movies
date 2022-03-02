@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
     return RepositoryProvider(
       create: (context) => MovieRepository(),
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: "Movie App",
         theme: ThemeData(primarySwatch: Colors.pink),
         home: const App(),
@@ -33,12 +34,33 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<UpcomingMovieBloc>(
-      lazy: false,
-      create: (BuildContext context) => UpcomingMovieBloc(
-        repository: context.read<MovieRepository>(),
-      )..add(const UpcomingMovieEventLoad()),
-      child: Container(),
+    return Scaffold(
+      body: BlocProvider<UpcomingMovieBloc>(
+        lazy: false,
+        create: (BuildContext context) => UpcomingMovieBloc(
+          repository: context.read<MovieRepository>(),
+        )..add(const UpcomingMovieEventLoad()),
+        child: BlocBuilder<UpcomingMovieBloc, UpcomingMovieState>(
+            builder: (context, state) {
+          return state.when(loading: () {
+            return const CircularProgressIndicator();
+          }, loaded: (movieResponse) {
+            return ListView.builder(
+                itemCount: movieResponse.movies.length,
+                itemBuilder: (_, index) {
+                  return Container(
+                      height: 60.0,
+                      width: 80.0,
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 238, 157, 184),
+                        borderRadius: BorderRadius.circular(20.0),
+                      ));
+                  child:
+                  Text('${movieResponse.movies[index]}');
+                });
+          });
+        }),
+      ),
     );
   }
 }
