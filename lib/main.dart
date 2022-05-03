@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:movies/movies/repository/movies_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/movies/bloc/upcoming_movies_bloc.dart';
-import 'package:movies/movies/ui/movie_home.dart';
+import 'package:movies/movies/ui/widgets/movie_card.dart';
+
+import 'movies/ui/movie_home.dart';
 
 void main() {
   final _dio = Dio();
@@ -41,7 +43,7 @@ class App extends StatelessWidget {
       create: (BuildContext context) => UpcomingMovieBloc(
         repository: context.read<MovieRepository>(),
       )..add(const UpcomingMovieEventLoad()),
-      child: const MovieHome(),
+      child: MovieHome(),
     ));
   }
 }

@@ -23,7 +23,8 @@ dependencies:
   dio:
   json_annotation:
   cached_network_image:
-  freezed_annotation: 
+  freezed_annotation:
+  flutter_native_splash: ^2.1.5 
 
 dev_dependencies:
   flutter_test:
